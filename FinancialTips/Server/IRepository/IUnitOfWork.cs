@@ -14,6 +14,7 @@ namespace FinancialTips.Server.IRepository
         IGenericRepository<User> Users { get; }
         IGenericRepository<Insight> Insights { get; }
         IGenericRepository<Blog> Blogs { get; }
+        IGenericRepository<Community> Community { get; }
         IGenericRepository<Chart> Charts { get; }
         IGenericRepository<FinancialPlanning> FinancialPlannings { get; }
         IGenericRepository<FinancialTip> FinancialTip { get; }

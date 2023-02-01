@@ -37,8 +37,6 @@ namespace FinancialTips.Shared.Domain
     public class Community : BaseDomainModel
     {
         public string Name { get; set; }
-        public int TipId { get; set; }
-        public virtual FinancialTip FinancialTip { get; set; }
 
     }
     public class FinancialTip : BaseDomainModel

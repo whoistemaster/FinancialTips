@@ -43,7 +43,7 @@ namespace FinancialTips.Server.Repository
             => _blogs ??= new GenericRepository<Blog>(_context);
         public IGenericRepository<Chart> Charts
             => _charts ??= new GenericRepository<Chart>(_context);
-        public IGenericRepository<Community> Communities
+        public IGenericRepository<Community> Community
             => _community ??= new GenericRepository<Community>(_context);
         public IGenericRepository<FinancialPlanning> FinancialPlannings
             => _financialplannings ??= new GenericRepository<FinancialPlanning>(_context);
