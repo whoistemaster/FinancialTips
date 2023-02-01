@@ -20,13 +20,13 @@ namespace FinancialTips.Server.Data
         {
         }
 
-        public DbSet<FinancialTip> FinancialTips { get; set; }
+        public DbSet<Tip> Tips { get; set; }
         public DbSet<Chart> Charts { get; set; }
         public DbSet<Insight> Insights { get; set; }
         public DbSet<FinancialPlanning> FinancialPlannings { get; set; }
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<Community> Communities { get; set; }
-        public DbSet<User> Userss { get; set; }
+        public DbSet<Community> Communitys { get; set; }
+        public DbSet<Customer> Customers { get; set; }
         public DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -17,13 +17,13 @@ namespace FinancialTips.Server.Repository
     {
         private readonly ApplicationDbContext _context;
         private IGenericRepository<Account> _accounts;
-        private IGenericRepository<User> _users;
+        private IGenericRepository<Customer> _customers;
         private IGenericRepository<Insight> _insights;
         private IGenericRepository<Blog> _blogs;
         private IGenericRepository<Chart> _charts;
         private IGenericRepository<Community> _community;
         private IGenericRepository<FinancialPlanning> _financialplannings;
-        private IGenericRepository<FinancialTip> _financialtip;
+        private IGenericRepository<Tip> _tips;
 
         private UserManager<ApplicationUser> _userManager;
 
@@ -35,8 +35,8 @@ namespace FinancialTips.Server.Repository
 
         public IGenericRepository<Account> Accounts
             => _accounts ??= new GenericRepository<Account>(_context);
-        public IGenericRepository<User> Users
-            => _users ??= new GenericRepository<User>(_context);
+        public IGenericRepository<Customer> Customers
+            => _customers ??= new GenericRepository<Customer>(_context);
         public IGenericRepository<Insight> Insights
             => _insights ??= new GenericRepository<Insight>(_context);
         public IGenericRepository<Blog> Blogs
@@ -47,8 +47,8 @@ namespace FinancialTips.Server.Repository
             => _community ??= new GenericRepository<Community>(_context);
         public IGenericRepository<FinancialPlanning> FinancialPlannings
             => _financialplannings ??= new GenericRepository<FinancialPlanning>(_context);
-        public IGenericRepository<FinancialTip> FinancialTip
-            => _financialtip ??= new GenericRepository<FinancialTip>(_context);
+        public IGenericRepository<Tip> Tips
+            => _tips ??= new GenericRepository<Tip>(_context);
 
         public void Dispose()
         {

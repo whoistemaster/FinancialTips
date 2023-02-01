@@ -13,60 +13,60 @@ namespace FinancialTips.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class TipsController : ControllerBase
     {
         //Refactored
         //private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        //public UsersController(ApplicationDbContext context)
-        public UsersController(IUnitOfWork unitOfWork)
+        //public TipsController(ApplicationDbContext context)
+        public TipsController(IUnitOfWork unitOfWork)
         {
             //Refractored
             //_context = context;
             _unitOfWork = unitOfWork;
         }
 
-        // GET: api/Users
+        // GET: api/Tips
         [HttpGet]
-        //public async Task<ActionResult<IEnumerable<User>>> GetUsers()]
-        public async Task<IActionResult> GetUsers()
+        //public async Task<ActionResult<IEnumerable<Tip>>> GetTips()]
+        public async Task<IActionResult> GetTips()
         {
             //Refactored
-            //return await _context.Users.ToListAsync();
-            var users = await _unitOfWork.Users.GetAll();
-            return Ok(users);
+            //return await _context.Tips.ToListAsync();
+            var tips = await _unitOfWork.Tips.GetAll();
+            return Ok(tips);
         }
 
-        // GET: api/Users/5
+        // GET: api/Tips/5
         [HttpGet("{id}")]
-        //public async Task<ActionResult<User>> GetUser(int id)
-        public async Task<IActionResult> GetUser(int id)
+        //public async Task<ActionResult<Tip>> GetTip(int id)
+        public async Task<IActionResult> GetTip(int id)
 
         {
-            //var user = await _context.Users.FindAsync(id);
-            var user = await _unitOfWork.Users.Get(q => q.Id == id);
+            //var tip = await _context.Tips.FindAsync(id);
+            var tip = await _unitOfWork.Tips.Get(q => q.Id == id);
 
-            if (user == null)
+            if (tip == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(tip);
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Tips/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutTip(int id, Tip tip)
         {
-            if (id != user.Id)
+            if (id != tip.Id)
             {
                 return BadRequest();
             }
 
-            //_context.Entry(user).State = EntityState.Modified;
-            _unitOfWork.Users.Update(user);
+            //_context.Entry(tip).State = EntityState.Modified;
+            _unitOfWork.Tips.Update(tip);
 
             try
             {
@@ -75,8 +75,8 @@ namespace FinancialTips.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                //if (!UserExists(id))
-                if (!await UserExists(id))
+                //if (!TipExists(id))
+                if (!await TipExists(id))
                 {
                     return NotFound();
                 }
@@ -89,44 +89,44 @@ namespace FinancialTips.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Tips
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Tip>> PostTip(Tip tip)
         {
-            //_context.Users.Add(user);
+            //_context.Tips.Add(tip);
             //await _context.SaveChangesAsync();
-            await _unitOfWork.Users.Insert(user);
+            await _unitOfWork.Tips.Insert(tip);
             await _unitOfWork.Save(HttpContext);
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetTip", new { id = tip.Id }, tip);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Tips/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteTip(int id)
         {
-            //var user = await _context.Users.FindAsync(id);
-            var user = await _unitOfWork.Users.Get(q => q.Id == id);
-            if (user == null)
+            //var tip = await _context.Tips.FindAsync(id);
+            var tip = await _unitOfWork.Tips.Get(q => q.Id == id);
+            if (tip == null)
             {
                 return NotFound();
             }
 
-            //_context.Users.Remove(user);
+            //_context.Tips.Remove(tip);
             //await _context.SaveChangesAsync();
-            await _unitOfWork.Users.Delete(id);
+            await _unitOfWork.Tips.Delete(id);
             await _unitOfWork.Save(HttpContext);
 
             return NoContent();
         }
 
-        //private bool UserExists(int id)
-        private async Task<bool> UserExists(int id)
+        //private bool TipExists(int id)
+        private async Task<bool> TipExists(int id)
         {
-            //return _context.Users.Any(e => e.Id == id);
-            var user = await _unitOfWork.Users.Get(q => q.Id == id);
-            return user != null;
+            //return _context.Tips.Any(e => e.Id == id);
+            var tip = await _unitOfWork.Tips.Get(q => q.Id == id);
+            return tip != null;
         }
     }
 }

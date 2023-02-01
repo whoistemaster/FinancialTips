@@ -1,0 +1,61 @@
+﻿@page  "/financialplanning/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+
+<h3 class="card-title">FinancialPlannings</h3>
+@if (FinancialPlannings == null)
+{
+    <div class="alert alert-info">Loading FinancialPlannings...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var financialplanning in FinancialPlannings)
+            {
+                <tr>
+                    <td>@financialplanning.Name</td>
+                    <td>
+                        <a href="/financialplannings/view/@financialplanning.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/financialplannings/edit/@financialplanning.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(financialplanning.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<FinancialPlanning> FinancialPlannings;
+
+    protected async override Task OnInitializedAsync()
+    {
+        FinancialPlannings = await _client.GetFromJsonAsync<List<FinancialPlanning>>($"{Endpoints.FinancialPlanningsEndpoint}");
+    }
+
+    async Task Delete(int financialplanningId)
+    {
+        var financialplanning = FinancialPlannings.First(q => q.Id == financialplanningId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{financialplanning.Name}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.FinancialPlanningsEndpoint}");
+            await OnInitializedAsync();
+        }
+    }
+}

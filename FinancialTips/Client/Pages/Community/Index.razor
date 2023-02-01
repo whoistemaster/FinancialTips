@@ -1,0 +1,61 @@
+﻿@page  "/community/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+
+<h3 class="card-title">Communitys</h3>
+@if (Communitys == null)
+{
+    <div class="alert alert-info">Loading Communitys...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var community in Communitys)
+            {
+                <tr>
+                    <td>@community.Name</td>
+                    <td>
+                        <a href="/communitys/view/@community.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/communitys/edit/@community.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(community.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Community> Communitys;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Communitys = await _client.GetFromJsonAsync<List<Community>>($"{Endpoints.CommunitysEndpoint}");
+    }
+
+    async Task Delete(int communityId)
+    {
+        var community = Communitys.First(q => q.Id == communityId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{community.Name}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.CommunitysEndpoint}");
+            await OnInitializedAsync();
+        }
+    }
+}

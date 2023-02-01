@@ -83,13 +83,12 @@ namespace FinancialTips.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Communities",
+                name: "Communitys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TipId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -97,7 +96,27 @@ namespace FinancialTips.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Communities", x => x.Id);
+                    table.PrimaryKey("PK_Communitys", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -171,27 +190,6 @@ namespace FinancialTips.Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PersistedGrants", x => x.Key);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Userss",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Userss", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -301,7 +299,7 @@ namespace FinancialTips.Server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FinancialTips",
+                name: "Tips",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -309,8 +307,7 @@ namespace FinancialTips.Server.Migrations
                     Year = table.Column<int>(type: "int", nullable: false),
                     CommunityId = table.Column<int>(type: "int", nullable: false),
                     BlogId = table.Column<int>(type: "int", nullable: false),
-                    PlanId = table.Column<int>(type: "int", nullable: false),
-                    FinancialPlanningId = table.Column<int>(type: "int", nullable: true),
+                    FinancialPlanningId = table.Column<int>(type: "int", nullable: false),
                     InsightId = table.Column<int>(type: "int", nullable: false),
                     ChartId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -320,33 +317,33 @@ namespace FinancialTips.Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FinancialTips", x => x.Id);
+                    table.PrimaryKey("PK_Tips", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FinancialTips_Blogs_BlogId",
+                        name: "FK_Tips_Blogs_BlogId",
                         column: x => x.BlogId,
                         principalTable: "Blogs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FinancialTips_Charts_ChartId",
+                        name: "FK_Tips_Charts_ChartId",
                         column: x => x.ChartId,
                         principalTable: "Charts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FinancialTips_Communities_CommunityId",
+                        name: "FK_Tips_Communitys_CommunityId",
                         column: x => x.CommunityId,
-                        principalTable: "Communities",
+                        principalTable: "Communitys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FinancialTips_FinancialPlannings_FinancialPlanningId",
+                        name: "FK_Tips_FinancialPlannings_FinancialPlanningId",
                         column: x => x.FinancialPlanningId,
                         principalTable: "FinancialPlannings",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FinancialTips_Insights_InsightId",
+                        name: "FK_Tips_Insights_InsightId",
                         column: x => x.InsightId,
                         principalTable: "Insights",
                         principalColumn: "Id",
@@ -366,8 +363,7 @@ namespace FinancialTips.Server.Migrations
                     Permission = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TipId = table.Column<int>(type: "int", nullable: false),
-                    FinancialTipId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -377,28 +373,103 @@ namespace FinancialTips.Server.Migrations
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Accounts_FinancialTips_FinancialTipId",
-                        column: x => x.FinancialTipId,
-                        principalTable: "FinancialTips",
+                        name: "FK_Accounts_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Accounts_Userss_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Userss",
+                        name: "FK_Accounts_Tips_TipId",
+                        column: x => x.TipId,
+                        principalTable: "Tips",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Accounts_FinancialTipId",
-                table: "Accounts",
-                column: "FinancialTipId");
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "6188b36d-d4e9-4f48-bf20-6d01f6bf9c61", "User", "USER" },
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "135d4129-2b21-493d-8c09-0d82d8f94766", "Administrator", "ADMINISTRATOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "e76c4031-052f-4c52-959e-f2815dadcdc0", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEHg5PSsVQRBkpLqqxB8c1/fL8TI0UaPKvoyB8j7tR9+vlOQpSD+RZj4UR4uiDfTrMg==", null, false, "3f57d342-c826-4dd6-b8b3-a14956b168d4", false, "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "Blogs",
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 3, "System", new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(9862), new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(9863), "Property", "System" },
+                    { 4, "System", new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(9864), new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(9864), "Savings Bond", "System" },
+                    { 1, "System", new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(1475), new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(9305), "Loans", "System" },
+                    { 2, "System", new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(9856), new DateTime(2023, 2, 1, 23, 2, 35, 733, DateTimeKind.Local).AddTicks(9859), "Lifestyle", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Charts",
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "System", new DateTime(2023, 2, 1, 23, 2, 35, 734, DateTimeKind.Local).AddTicks(9576), new DateTime(2023, 2, 1, 23, 2, 35, 734, DateTimeKind.Local).AddTicks(9585), "Monthly Savings", "System" },
+                    { 2, "System", new DateTime(2023, 2, 1, 23, 2, 35, 734, DateTimeKind.Local).AddTicks(9587), new DateTime(2023, 2, 1, 23, 2, 35, 734, DateTimeKind.Local).AddTicks(9588), "Yearly Savings", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Communitys",
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2001), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2005), "Investing 101", "System" },
+                    { 2, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2010), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2010), "Budgeting 101", "System" },
+                    { 3, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2011), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2012), "Promo Codes", "System" },
+                    { 4, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2013), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(2014), "Saving Hacks", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "FinancialPlannings",
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 7, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5226), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5226), "CPF", "System" },
+                    { 6, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5224), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5224), "Student Loan", "System" },
+                    { 3, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5218), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5219), "Insurance", "System" },
+                    { 4, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5220), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5221), "Property", "System" },
+                    { 2, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5216), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5217), "Medisave", "System" },
+                    { 5, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5222), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5223), "Tax", "System" },
+                    { 1, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5207), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(5214), "Budget", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Insights",
+                columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7491), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7495), "Utilities", "System" },
+                    { 2, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7497), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7498), "Bills", "System" },
+                    { 3, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7499), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7500), "Cards", "System" },
+                    { 4, "System", new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7501), new DateTime(2023, 2, 1, 23, 2, 35, 735, DateTimeKind.Local).AddTicks(7502), "Insurance Tips", "System" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "3781efa7-66dc-47f0-860f-e506d04102e4" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_UserId",
+                name: "IX_Accounts_CustomerId",
                 table: "Accounts",
-                column: "UserId");
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Accounts_TipId",
+                table: "Accounts",
+                column: "TipId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -451,32 +522,6 @@ namespace FinancialTips.Server.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FinancialTips_BlogId",
-                table: "FinancialTips",
-                column: "BlogId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FinancialTips_ChartId",
-                table: "FinancialTips",
-                column: "ChartId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FinancialTips_CommunityId",
-                table: "FinancialTips",
-                column: "CommunityId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FinancialTips_FinancialPlanningId",
-                table: "FinancialTips",
-                column: "FinancialPlanningId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FinancialTips_InsightId",
-                table: "FinancialTips",
-                column: "InsightId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PersistedGrants_Expiration",
                 table: "PersistedGrants",
                 column: "Expiration");
@@ -490,6 +535,31 @@ namespace FinancialTips.Server.Migrations
                 name: "IX_PersistedGrants_SubjectId_SessionId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "SessionId", "Type" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tips_BlogId",
+                table: "Tips",
+                column: "BlogId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tips_ChartId",
+                table: "Tips",
+                column: "ChartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tips_CommunityId",
+                table: "Tips",
+                column: "CommunityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tips_FinancialPlanningId",
+                table: "Tips",
+                column: "FinancialPlanningId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tips_InsightId",
+                table: "Tips",
+                column: "InsightId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -519,10 +589,10 @@ namespace FinancialTips.Server.Migrations
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
-                name: "FinancialTips");
+                name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Userss");
+                name: "Tips");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -537,7 +607,7 @@ namespace FinancialTips.Server.Migrations
                 name: "Charts");
 
             migrationBuilder.DropTable(
-                name: "Communities");
+                name: "Communitys");
 
             migrationBuilder.DropTable(
                 name: "FinancialPlannings");

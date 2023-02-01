@@ -1,0 +1,61 @@
+﻿@page  "/chart/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+
+<h3 class="card-title">Charts</h3>
+@if (Charts == null)
+{
+    <div class="alert alert-info">Loading Charts...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var chart in Charts)
+            {
+                <tr>
+                    <td>@chart.Name</td>
+                    <td>
+                        <a href="/charts/view/@chart.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/charts/edit/@chart.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(chart.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Chart> Charts;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Charts = await _client.GetFromJsonAsync<List<Chart>>($"{Endpoints.ChartsEndpoint}");
+    }
+
+    async Task Delete(int chartId)
+    {
+        var chart = Charts.First(q => q.Id == chartId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{chart.Name}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.ChartsEndpoint}");
+            await OnInitializedAsync();
+        }
+    }
+}

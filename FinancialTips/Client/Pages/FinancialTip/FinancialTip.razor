@@ -1,11 +1,62 @@
-﻿@page "/financialtip/"
+﻿@page  "/tip/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
 
 
-<h3>FinancialTips</h3>
+<h3 class="card-title"> Car Tips</h3>
+@if (Tips == null)
+{
+    <div class="alert alert-info">Loading Tips...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Blog</th>
+                <th>Chart</th>
+                <th>Community</th>
+                <th>FinancialPlanning</th>
+                <th>Insights</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tip in Tips)
+            {
+            <tr>
+                <td>@tip.Blog.Name</td>
+                <td>@tip.Chart.Name</td>
+                <td>@tip.Community.Name</td>
+                <td>@tip.FinancialPlanning.Name</td>
+                <td>@tip.Insight.Name</td>
+                <td>@tip.Year</td>
+                var confirm = await js.InvokeAsync
+                <bool>("confirm", $"Do you want to delete{tip.Year}?");</bool>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
+    private List<Tip> Tips;
 
+    protected async override Task OnInitializedAsync()
+    {
+        Tips = await _client.GetFromJsonAsync<List<Tip>>($"{Endpoints.TipsEndpoint}");
+    }
+
+    async Task Delete(int tipId)
+    {
+        var tip = Tips.First(q => q.Id == tipId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{tip.Year}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.TipsEndpoint}");
+            await OnInitializedAsync();
+        }
+    }
 }

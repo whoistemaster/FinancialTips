@@ -11,8 +11,8 @@ namespace FinancialTips.Shared.Domain
         public string Permission { get; set; }
         public string Status { get; set; }
         public int TipId { get; set; }
-        public virtual FinancialTip FinancialTip { get; set; }
-        public int UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual Tip Tip { get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer User { get; set; }
     }
 }

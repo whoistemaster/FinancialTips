@@ -39,14 +39,14 @@ namespace FinancialTips.Shared.Domain
         public string Name { get; set; }
 
     }
-    public class FinancialTip : BaseDomainModel
+    public class Tip : BaseDomainModel
     {
         public int Year { get; set; }
         public int CommunityId { get; set; }
         public virtual Community Community { get; set; }
         public int BlogId { get; set; }
         public virtual Blog Blog { get; set; }
-        public int PlanId { get; set; }
+        public int FinancialPlanningId { get; set; }
         public virtual FinancialPlanning FinancialPlanning { get; set; }
         public int InsightId { get; set; }
         public virtual Insight Insight { get; set; }

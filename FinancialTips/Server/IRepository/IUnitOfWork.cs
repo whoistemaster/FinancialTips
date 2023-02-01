@@ -11,12 +11,12 @@ namespace FinancialTips.Server.IRepository
     {
         Task Save(HttpContext httpContext);
         IGenericRepository<Account> Accounts { get; }
-        IGenericRepository<User> Users { get; }
+        IGenericRepository<Customer> Customers { get; }
         IGenericRepository<Insight> Insights { get; }
         IGenericRepository<Blog> Blogs { get; }
         IGenericRepository<Community> Community { get; }
         IGenericRepository<Chart> Charts { get; }
         IGenericRepository<FinancialPlanning> FinancialPlannings { get; }
-        IGenericRepository<FinancialTip> FinancialTip { get; }
+        IGenericRepository<Tip> Tips { get; }
     }
 }

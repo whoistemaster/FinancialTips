@@ -55,12 +55,12 @@ namespace FinancialTips.Server.Configurations.Entities
 
             new FinancialPlanning
             {
-                 Id = 5,
-                 Name = "Tax",
-                 DateCreated = DateTime.Now,
-                 DateUpdated = DateTime.Now,
-                 CreatedBy = "System",
-                 UpdatedBy = "System"
+                Id = 5,
+                Name = "Tax",
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now,
+                CreatedBy = "System",
+                UpdatedBy = "System"
             },
 
             new FinancialPlanning

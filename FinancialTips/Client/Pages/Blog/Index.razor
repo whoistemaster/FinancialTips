@@ -1,0 +1,61 @@
+﻿@page  "/blog/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+
+<h3 class="card-title">Blogs</h3>
+@if (Blogs == null)
+{
+    <div class="alert alert-info">Loading Blogs...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var blog in Blogs)
+            {
+                <tr>
+                    <td>@blog.Name</td>
+                    <td>
+                        <a href="/blogs/view/@blog.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/blogs/edit/@blog.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(blog.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Blog> Blogs;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Blogs = await _client.GetFromJsonAsync<List<Blog>>($"{Endpoints.BlogsEndpoint}");
+    }
+
+    async Task Delete(int blogId)
+    {
+        var blog = Blogs.First(q => q.Id == blogId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{blog.Name}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.BlogsEndpoint}");
+            await OnInitializedAsync();
+        }
+    }
+}
