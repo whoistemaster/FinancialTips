@@ -1,0 +1,60 @@
+﻿@page  "/account/"
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+
+<h3 class="card-title"> Car Accounts</h3>
+@if (Accounts == null)
+{
+    <div class="alert alert-info">Loading Accounts...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Account ID</th>
+                <th>Date</th>
+                <th>Duration in days</th>
+                <th>Email Address</th>
+                <th>Contact</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in Accounts)
+            {
+            <tr>
+                <td>@account.Id</td>
+                <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
+                <td>@account.Customer.EmailAddress</td>
+                <td>@account.Customer.Contact</td>
+
+                var confirm = await js.InvokeAsync
+                <bool>("confirm", $"Do you want to delete{account.Id}?");</bool>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Account> Accounts;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Accounts = await _client.GetFromJsonAsync<List<Account>>($"{Endpoints.AccountsEndpoint}");
+    }
+
+    async Task Delete(int accountId)
+    {
+        var account = Accounts.First(q => q.Id == accountId);
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{account.Id}?");
+        if (confirm)
+        {
+            await _client.DeleteAsync($"{Endpoints.AccountsEndpoint}");
+            await OnInitializedAsync();
+        }
+    }
+}

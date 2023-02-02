@@ -34,7 +34,7 @@ namespace FinancialTips.Server.Controllers
         {
             //Refactored
             //return await _context.Accounts.ToListAsync();
-            var accounts = await _unitOfWork.Accounts.GetAll();
+            var accounts = await _unitOfWork.Accounts.GetAll(includes: q => q.Include(x =>x.Tip).Include(x => x.Customer));
             return Ok(accounts);
         }
 
