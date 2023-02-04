@@ -53,5 +53,6 @@ namespace FinancialTips.Shared.Domain
         public int ChartId { get; set; }
         public virtual Chart Chart { get; set; }
         public virtual List<Account> Accounts { get; set; }
+        public double RentalRate { get; set; }
     }
 }

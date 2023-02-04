@@ -1,4 +1,4 @@
-﻿@page  "/financialplanning/"
+﻿@page  "/financialplannings/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
@@ -51,10 +51,10 @@ else
     async Task Delete(int financialplanningId)
     {
         var financialplanning = FinancialPlannings.First(q => q.Id == financialplanningId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{financialplanning.Name}?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {financialplanning.Name}?");
         if (confirm)
         {
-            await _client.DeleteAsync($"{Endpoints.FinancialPlanningsEndpoint}");
+            await _client.DeleteAsync($"{Endpoints.FinancialPlanningsEndpoint}/{financialplanningId}");
             await OnInitializedAsync();
         }
     }

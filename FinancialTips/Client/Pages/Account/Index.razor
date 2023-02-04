@@ -1,10 +1,10 @@
-﻿@page  "/account/"
+﻿@page  "/accounts/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
 
 
-<h3 class="card-title"> Car Accounts</h3>
+<h3 class="card-title"> Accounts </h3>
 @if (Accounts == null)
 {
     <div class="alert alert-info">Loading Accounts...</div>
@@ -50,10 +50,10 @@ else
     async Task Delete(int accountId)
     {
         var account = Accounts.First(q => q.Id == accountId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{account.Id}?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {account.Id}?");
         if (confirm)
         {
-            await _client.DeleteAsync($"{Endpoints.AccountsEndpoint}");
+            await _client.DeleteAsync($"{Endpoints.AccountsEndpoint}/{accountId}");
             await OnInitializedAsync();
         }
     }

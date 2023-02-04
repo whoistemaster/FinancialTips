@@ -1,10 +1,16 @@
-﻿@page  "/tip/"
+﻿@page  "/tips/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
 
 
-<h3 class="card-title"> Car Tips</h3>
+<h3 class="card-title"> Tips </h3>
+<a href="/tips/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create Tips
+</a>
+<br />
+<br />
 @if (Tips == null)
 {
     <div class="alert alert-info">Loading Tips...</div>
@@ -33,8 +39,17 @@ else
                 <td>@tip.FinancialPlanning.Name</td>
                 <td>@tip.Insight.Name</td>
                 <td>@tip.Year</td>
-                var confirm = await js.InvokeAsync
-                <bool>("confirm", $"Do you want to delete{tip.Year}?");</bool>
+                <td>
+                <a href="/tips/view/@tip.Id" class="btn btn-primary">
+                    <span class="oi oi-book"></span>
+                </a>
+                <a href="/tips/edit/@tip.Id" class="btn btn-warning">
+                    <span class="oi oi-pencil"></span>
+                </a>
+                <button class="btn btn-danger" @onclick="@(()=>Delete(tip.Year))">
+                    <span class="oi oi-delete"></span>
+                </button>
+                </td>
             </tr>
             }
         </tbody>
@@ -52,10 +67,10 @@ else
     async Task Delete(int tipId)
     {
         var tip = Tips.First(q => q.Id == tipId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{tip.Year}?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {tip.Year}?");
         if (confirm)
         {
-            await _client.DeleteAsync($"{Endpoints.TipsEndpoint}");
+            await _client.DeleteAsync($"{Endpoints.TipsEndpoint}/{tipId}");
             await OnInitializedAsync();
         }
     }

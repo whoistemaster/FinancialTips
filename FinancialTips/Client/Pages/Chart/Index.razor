@@ -1,4 +1,4 @@
-﻿@page  "/chart/"
+﻿@page  "/charts/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
@@ -51,10 +51,10 @@ else
     async Task Delete(int chartId)
     {
         var chart = Charts.First(q => q.Id == chartId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{chart.Name}?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {chart.Name}?");
         if (confirm)
         {
-            await _client.DeleteAsync($"{Endpoints.ChartsEndpoint}");
+            await _client.DeleteAsync($"{Endpoints.ChartsEndpoint}/{chartId}");
             await OnInitializedAsync();
         }
     }

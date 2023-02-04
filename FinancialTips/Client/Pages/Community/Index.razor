@@ -1,4 +1,4 @@
-﻿@page  "/community/"
+﻿@page  "/communitys/"
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
@@ -51,10 +51,10 @@ else
     async Task Delete(int communityId)
     {
         var community = Communitys.First(q => q.Id == communityId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete{community.Name}?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {community.Name}?");
         if (confirm)
         {
-            await _client.DeleteAsync($"{Endpoints.CommunitysEndpoint}");
+            await _client.DeleteAsync($"{Endpoints.CommunitysEndpoint}/{communityId}");
             await OnInitializedAsync();
         }
     }
