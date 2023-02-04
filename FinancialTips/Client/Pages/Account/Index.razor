@@ -5,6 +5,12 @@
 
 
 <h3 class="card-title"> Accounts </h3>
+<a href="/accounts/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Account
+</a>
+<br />
+<br />
 @if (Accounts == null)
 {
     <div class="alert alert-info">Loading Accounts...</div>
@@ -25,15 +31,15 @@ else
         <tbody>
             @foreach (var account in Accounts)
             {
-            <tr>
-                <td>@account.Id</td>
-                <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-                <td>@account.Customer.EmailAddress</td>
-                <td>@account.Customer.Contact</td>
+                <tr>
+                    <td>@account.Id</td>
+                    <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
+                    <td>@account.Customer.EmailAddress</td>
+                    <td>@account.Customer.Contact</td>
 
-                var confirm = await js.InvokeAsync
-                <bool>("confirm", $"Do you want to delete{account.Id}?");</bool>
-            </tr>
+                    var confirm = await js.InvokeAsync
+                    <bool>("confirm", $"Do you want to delete{account.Id}?");</bool>
+                </tr>
             }
         </tbody>
     </table>

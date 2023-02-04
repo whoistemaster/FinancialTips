@@ -1,0 +1,35 @@
+﻿@page "/blogs/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Create New Blogs</h3>
+<hr />
+<br />
+<EditForm Model="@blog" OnValidSubmit="CreateBlog">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@blog.Name" class="form-control" />
+            <ValidationMessage For="@(() => blog.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Blogs
+    </button>
+</EditForm>
+
+
+@code {
+    Blog blog = new Blog();
+
+    private async Task CreateBlog()
+    {
+        await _client.PostAsJsonAsync(Endpoints.BlogsEndpoint, blog);
+        _navManager.NavigateTo("/blogs/");
+    }
+
+}

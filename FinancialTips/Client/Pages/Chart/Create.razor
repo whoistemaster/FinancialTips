@@ -1,0 +1,35 @@
+﻿@page "/charts/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Create New Charts</h3>
+<hr />
+<br />
+<EditForm Model="@chart" OnValidSubmit="CreateChart">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@chart.Name" class="form-control" />
+            <ValidationMessage For="@(() => chart.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Charts
+    </button>
+</EditForm>
+
+
+@code {
+    Chart chart = new Chart();
+
+    private async Task CreateChart()
+    {
+        await _client.PostAsJsonAsync(Endpoints.ChartsEndpoint, chart);
+        _navManager.NavigateTo("/charts/");
+    }
+
+}

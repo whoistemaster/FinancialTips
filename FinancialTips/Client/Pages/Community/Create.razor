@@ -1,0 +1,35 @@
+﻿@page "/communitys/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Create New Communities</h3>
+<hr />
+<br />
+<EditForm Model="@community" OnValidSubmit="CreateCommunity">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@community.Name" class="form-control" />
+            <ValidationMessage For="@(() => community.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Communities
+    </button>
+</EditForm>
+
+
+@code {
+    Community community = new Community();
+
+    private async Task CreateCommunity()
+    {
+        await _client.PostAsJsonAsync(Endpoints.CommunitysEndpoint, community);
+        _navManager.NavigateTo("/communitys/");
+    }
+
+}

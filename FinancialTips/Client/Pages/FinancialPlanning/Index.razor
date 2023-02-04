@@ -4,7 +4,13 @@
 @attribute [Authorize]
 
 
-<h3 class="card-title">FinancialPlannings</h3>
+<h3 class="card-title"> FinancialPlannings </h3>
+<a href="/financialplannings/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Financial PLannings
+</a>
+<br />
+<br />
 @if (FinancialPlannings == null)
 {
     <div class="alert alert-info">Loading FinancialPlannings...</div>

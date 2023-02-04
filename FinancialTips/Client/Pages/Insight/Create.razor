@@ -1,0 +1,35 @@
+﻿@page "/insights/create/"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Create New Insights</h3>
+<hr />
+<br />
+<EditForm Model="@insight" OnValidSubmit="CreateInsight">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@insight.Name" class="form-control" />
+            <ValidationMessage For="@(() => insight.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Insights
+    </button>
+</EditForm>
+
+
+@code {
+    Insight insight = new Insight();
+
+    private async Task CreateInsight()
+    {
+        await _client.PostAsJsonAsync(Endpoints.InsightsEndpoint, insight);
+        _navManager.NavigateTo("/insights/");
+    }
+
+}
