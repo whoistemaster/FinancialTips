@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinancialTips.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230204221814_newdb")]
+    [Migration("20230205112949_newdb")]
     partial class newdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,7 +96,7 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1019e3a9-d10b-4872-bb18-a5a53cad913f",
+                            ConcurrencyStamp = "5a924da0-9548-43b4-8233-142e23ee531e",
                             Email = "admin@localhost.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -104,9 +104,9 @@ namespace FinancialTips.Server.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO1C8xuLVFU1uYh9LTk84dxq/UQSyQZ9UmrdlhVXsL9nOq5I3sahxh1zZEpY26fwrw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFmq80LdJXMP4ODFO2aAOzeMstkL+x0j7+sDajdAvFHL2lQpN002tlfdrx9550aWNA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "08f9297c-18e7-49b5-b733-2ffeb6239f35",
+                            SecurityStamp = "a6f14d69-18e6-4584-b63c-b3353111be74",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -186,8 +186,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 781, DateTimeKind.Local).AddTicks(9060),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(5988),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 188, DateTimeKind.Local).AddTicks(394),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 189, DateTimeKind.Local).AddTicks(2968),
                             Name = "Loans",
                             UpdatedBy = "System"
                         },
@@ -195,8 +195,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6891),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6895),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 189, DateTimeKind.Local).AddTicks(3930),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 189, DateTimeKind.Local).AddTicks(3934),
                             Name = "Lifestyle",
                             UpdatedBy = "System"
                         },
@@ -204,8 +204,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6898),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6899),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 189, DateTimeKind.Local).AddTicks(3990),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 189, DateTimeKind.Local).AddTicks(3991),
                             Name = "Property",
                             UpdatedBy = "System"
                         },
@@ -213,8 +213,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6900),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6901),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 189, DateTimeKind.Local).AddTicks(3996),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 189, DateTimeKind.Local).AddTicks(3997),
                             Name = "Savings Bond",
                             UpdatedBy = "System"
                         });
@@ -251,8 +251,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7712),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7720),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 190, DateTimeKind.Local).AddTicks(8629),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 190, DateTimeKind.Local).AddTicks(8646),
                             Name = "Monthly Savings",
                             UpdatedBy = "System"
                         },
@@ -260,8 +260,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7723),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7724),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 190, DateTimeKind.Local).AddTicks(8650),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 190, DateTimeKind.Local).AddTicks(8651),
                             Name = "Yearly Savings",
                             UpdatedBy = "System"
                         });
@@ -298,8 +298,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1242),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1247),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2948),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2956),
                             Name = "Investing 101",
                             UpdatedBy = "System"
                         },
@@ -307,8 +307,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1251),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1252),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2960),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2961),
                             Name = "Budgeting 101",
                             UpdatedBy = "System"
                         },
@@ -316,8 +316,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1253),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1254),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2964),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2965),
                             Name = "Promo Codes",
                             UpdatedBy = "System"
                         },
@@ -325,8 +325,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1256),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1257),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2967),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(2969),
                             Name = "Saving Hacks",
                             UpdatedBy = "System"
                         });
@@ -402,8 +402,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5464),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5471),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8573),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8580),
                             Name = "Budget",
                             UpdatedBy = "System"
                         },
@@ -411,8 +411,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5474),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5475),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8583),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8585),
                             Name = "Medisave",
                             UpdatedBy = "System"
                         },
@@ -420,8 +420,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5477),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5478),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8587),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8588),
                             Name = "Insurance",
                             UpdatedBy = "System"
                         },
@@ -429,8 +429,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5479),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5480),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8591),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8592),
                             Name = "Property",
                             UpdatedBy = "System"
                         },
@@ -438,8 +438,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5481),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5482),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8594),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8596),
                             Name = "Tax",
                             UpdatedBy = "System"
                         },
@@ -447,8 +447,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5483),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5484),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8598),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8599),
                             Name = "Student Loan",
                             UpdatedBy = "System"
                         },
@@ -456,8 +456,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 7,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5486),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5487),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8601),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 191, DateTimeKind.Local).AddTicks(8603),
                             Name = "CPF",
                             UpdatedBy = "System"
                         });
@@ -494,8 +494,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8774),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8780),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2802),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2808),
                             Name = "Utilities",
                             UpdatedBy = "System"
                         },
@@ -503,8 +503,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8783),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8784),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2812),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2813),
                             Name = "Bills",
                             UpdatedBy = "System"
                         },
@@ -512,8 +512,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8854),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8855),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2816),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2817),
                             Name = "Cards",
                             UpdatedBy = "System"
                         },
@@ -521,8 +521,8 @@ namespace FinancialTips.Server.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8856),
-                            DateUpdated = new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8857),
+                            DateCreated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2819),
+                            DateUpdated = new DateTime(2023, 2, 5, 19, 29, 49, 192, DateTimeKind.Local).AddTicks(2821),
                             Name = "Insurance Tips",
                             UpdatedBy = "System"
                         });
@@ -716,14 +716,14 @@ namespace FinancialTips.Server.Migrations
                         new
                         {
                             Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            ConcurrencyStamp = "e2d39b7d-a22f-4fe5-8992-b4ce1dc266ea",
+                            ConcurrencyStamp = "cbdff20a-3a5d-4986-ac26-9f18b1bf6a5c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            ConcurrencyStamp = "06f6776e-1af7-4978-92d3-66bb6fd082d4",
+                            ConcurrencyStamp = "58a8f526-e10d-46a3-8a6e-576c3fc77595",
                             Name = "User",
                             NormalizedName = "USER"
                         });

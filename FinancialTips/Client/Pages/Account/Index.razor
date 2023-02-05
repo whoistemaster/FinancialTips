@@ -11,6 +11,7 @@
 </a>
 <br />
 <br />
+
 @if (Accounts == null)
 {
     <div class="alert alert-info">Loading Accounts...</div>
@@ -21,6 +22,8 @@ else
         <thead>
             <tr>
                 <th>Account Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Date</th>
                 <th>Duration in days</th>
                 <th>Email Address</th>
@@ -31,15 +34,16 @@ else
         <tbody>
             @foreach (var account in Accounts)
             {
-                <tr>
-                    <td>@account.Id</td>
-                    <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-                    <td>@account.Customer.EmailAddress</td>
-                    <td>@account.Customer.Contact</td>
+            <tr>
+                <td>@account.Id</td>
+                <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
+                <td>@((account.DateIn - account.DateOut).TotalDays.ToString())</td>
+                <td>@account.Customer.EmailAddress</td>
+                <td>@account.Customer.Contact</td>
 
-                    var confirm = await js.InvokeAsync
-                    <bool>("confirm", $"Do you want to delete{account.Id}?");</bool>
-                </tr>
+                var confirm = await js.InvokeAsync
+                <bool>("confirm", $"Do you want to delete{account.Id}?");</bool>
+            </tr>
             }
         </tbody>
     </table>
