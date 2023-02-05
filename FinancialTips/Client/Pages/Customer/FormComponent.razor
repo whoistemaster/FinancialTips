@@ -1,11 +1,4 @@
-﻿@page "/customers/create/"
-@inject HttpClient _client
-@inject NavigationManager _navManager
-
-<h3>Create New Customer</h3>
-<hr />
-<br />
-<EditForm Model="@customer" OnValidSubmit="CreateCustomer">
+﻿<EditForm Model="@customer" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -51,18 +44,14 @@
     </div>
 
     <button type="submit" class="btn btn-success btn-block">
-        Create Customer
+        @ButtonText
     </button>
+    <FinancialTips.Client.Components.BackToList Target="Customers" />
 </EditForm>
 
-
 @code {
-    Customer customer = new Customer();
-
-    private async Task CreateCustomer()
-    {
-        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, customer);
-        _navManager.NavigateTo("/customers/");
-    }
+    [Parameter] public Customer customer { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
 
 }

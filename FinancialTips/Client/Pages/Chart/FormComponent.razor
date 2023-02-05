@@ -1,0 +1,25 @@
+﻿<EditForm Model="@chart" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@chart.Name" class="form-control" />
+            <ValidationMessage For="@(() => chart.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+    <FinancialTips.Client.Components.BackToList Target="Charts" />
+</EditForm>
+
+@code {
+    [Parameter] public Chart chart { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+
+}

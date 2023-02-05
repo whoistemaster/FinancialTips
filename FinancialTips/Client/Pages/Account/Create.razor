@@ -10,15 +10,15 @@
     <ValidationSummary />
 
     <div class="form-group">
-        <label>Financial Tips: </label>
+        <label>Email Address: </label>
         <div>
             <InputSelect @bind-Value="account.TipId" class="form-control">
-                <option value=" ">-- Select Tip -- </option>
+                <option value=" ">-- Select Email Address -- </option>
                 @if (Tips != null)
                 {
-                    foreach (var tip in Tips)
+                    foreach (var customer in Customers)
                     {
-                        <option value="@tip.Id">@tip.Blog.Name @tip.Chart.Name @tip.Community.Name @tip.FinancialPlanning.Name @tip.Insight.Name</option>
+                        <option value="@customer.EmailAddress">@customer.EmailAddress </option>
                     }
                 }
             </InputSelect>
@@ -26,7 +26,42 @@
         </div>
     </div>
 
-    
+
+    <div class="form-group">
+        <label>Contact: </label>
+        <div>
+            <InputSelect @bind-Value="account.TipId" class="form-control">
+                <option value=" ">-- Select Email Address -- </option>
+                @if (Tips != null)
+                {
+                    foreach (var customer in Customers)
+                    {
+                        <option value="@customer.EmailAddress">@customer.Contact </option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => account.TipId)" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label>Date Out: </label>
+        <div>
+            <InputDate @bind-Value="account.TipId" class="form-control">
+                <option value=" ">-- Select Date Out -- </option>
+                @if (account.Id > 0)
+                {
+                    foreach (var customer in Customers)
+                    {
+                        <option value="@customer.EmailAddress">@customer.Contact </option>
+                    }
+                }
+            </InputDate>
+            <ValidationMessage For="@(() => account.TipId)" />
+        </div>
+    </div>
+
     <button type="submit" class="btn btn-success btn-block">
         Create Accounts
     </button>

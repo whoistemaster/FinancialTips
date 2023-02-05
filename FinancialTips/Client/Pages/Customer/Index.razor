@@ -20,7 +20,9 @@ else
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>Driving License</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
                 <th>Contact Number</th>
                 <th>Email Address</th>
                 <th>Actions</th>
@@ -30,11 +32,19 @@ else
             @foreach (var customer in Customers)
             {
             <tr>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
                 <td>@customer.Gender</td>
                 <td>@customer.Contact</td>
                 <td>@customer.EmailAddress</td>
 
                 <td>
+                    <a href="/tips/view/@customer.Id" class="btn btn-primary">
+                        <span class="oi oi-book"></span>
+                    </a>
+                    <a href="/tips/edit/@customer.Id" class="btn btn-warning">
+                        <span class="oi oi-pencil"></span>
+                    </a>
                     <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
                         <span class="oi oi-delete"></span>
                     </button>

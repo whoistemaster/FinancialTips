@@ -105,6 +105,8 @@ namespace FinancialTips.Server.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -388,24 +390,24 @@ namespace FinancialTips.Server.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "c9928e61-2825-43c8-968c-5b4b3092cdb5", "User", "USER" },
-                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "7079b13b-8ad7-4eed-9d88-5bbadb91280f", "Administrator", "ADMINISTRATOR" }
+                    { "bd2bcf0c-20db-474f-8407-5a6b159518bb", "06f6776e-1af7-4978-92d3-66bb6fd082d4", "User", "USER" },
+                    { "ad2bcf0c-20db-474f-8407-5a6b159518ba", "e2d39b7d-a22f-4fe5-8992-b4ce1dc266ea", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "2e5bbdb6-501a-40a2-acba-6485ceec0e3f", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEApG+IbduTUyltkhhlakTj4V9ljFy8bEPRwTS02qk6XzPHa9M6Pf95CcAQ5iAmeUiw==", null, false, "12e57648-7c53-46c0-b493-06ac81ca791e", false, "Admin" });
+                values: new object[] { "3781efa7-66dc-47f0-860f-e506d04102e4", 0, "1019e3a9-d10b-4872-bb18-a5a53cad913f", "admin@localhost.com", false, "Admin", "User", false, null, "ADMIN@LOCALHOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEO1C8xuLVFU1uYh9LTk84dxq/UQSyQZ9UmrdlhVXsL9nOq5I3sahxh1zZEpY26fwrw==", null, false, "08f9297c-18e7-49b5-b733-2ffeb6239f35", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Blogs",
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 3, "System", new DateTime(2023, 2, 5, 0, 55, 48, 110, DateTimeKind.Local).AddTicks(6319), new DateTime(2023, 2, 5, 0, 55, 48, 110, DateTimeKind.Local).AddTicks(6319), "Property", "System" },
-                    { 4, "System", new DateTime(2023, 2, 5, 0, 55, 48, 110, DateTimeKind.Local).AddTicks(6320), new DateTime(2023, 2, 5, 0, 55, 48, 110, DateTimeKind.Local).AddTicks(6321), "Savings Bond", "System" },
-                    { 1, "System", new DateTime(2023, 2, 5, 0, 55, 48, 109, DateTimeKind.Local).AddTicks(7719), new DateTime(2023, 2, 5, 0, 55, 48, 110, DateTimeKind.Local).AddTicks(5786), "Loans", "System" },
-                    { 2, "System", new DateTime(2023, 2, 5, 0, 55, 48, 110, DateTimeKind.Local).AddTicks(6313), new DateTime(2023, 2, 5, 0, 55, 48, 110, DateTimeKind.Local).AddTicks(6316), "Lifestyle", "System" }
+                    { 3, "System", new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6898), new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6899), "Property", "System" },
+                    { 4, "System", new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6900), new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6901), "Savings Bond", "System" },
+                    { 1, "System", new DateTime(2023, 2, 5, 6, 18, 13, 781, DateTimeKind.Local).AddTicks(9060), new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(5988), "Loans", "System" },
+                    { 2, "System", new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6891), new DateTime(2023, 2, 5, 6, 18, 13, 783, DateTimeKind.Local).AddTicks(6895), "Lifestyle", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -413,8 +415,8 @@ namespace FinancialTips.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(5332), new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(5340), "Monthly Savings", "System" },
-                    { 2, "System", new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(5343), new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(5343), "Yearly Savings", "System" }
+                    { 1, "System", new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7712), new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7720), "Monthly Savings", "System" },
+                    { 2, "System", new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7723), new DateTime(2023, 2, 5, 6, 18, 13, 784, DateTimeKind.Local).AddTicks(7724), "Yearly Savings", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -422,10 +424,10 @@ namespace FinancialTips.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7743), new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7747), "Investing 101", "System" },
-                    { 2, "System", new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7750), new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7750), "Budgeting 101", "System" },
-                    { 3, "System", new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7752), new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7752), "Promo Codes", "System" },
-                    { 4, "System", new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7753), new DateTime(2023, 2, 5, 0, 55, 48, 111, DateTimeKind.Local).AddTicks(7754), "Saving Hacks", "System" }
+                    { 1, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1242), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1247), "Investing 101", "System" },
+                    { 2, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1251), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1252), "Budgeting 101", "System" },
+                    { 3, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1253), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1254), "Promo Codes", "System" },
+                    { 4, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1256), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(1257), "Saving Hacks", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -433,13 +435,13 @@ namespace FinancialTips.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 7, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(708), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(709), "CPF", "System" },
-                    { 6, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(706), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(707), "Student Loan", "System" },
-                    { 3, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(701), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(701), "Insurance", "System" },
-                    { 4, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(702), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(703), "Property", "System" },
-                    { 2, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(699), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(699), "Medisave", "System" },
-                    { 5, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(704), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(705), "Tax", "System" },
-                    { 1, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(692), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(697), "Budget", "System" }
+                    { 7, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5486), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5487), "CPF", "System" },
+                    { 6, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5483), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5484), "Student Loan", "System" },
+                    { 3, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5477), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5478), "Insurance", "System" },
+                    { 4, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5479), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5480), "Property", "System" },
+                    { 2, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5474), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5475), "Medisave", "System" },
+                    { 5, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5481), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5482), "Tax", "System" },
+                    { 1, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5464), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(5471), "Budget", "System" }
                 });
 
             migrationBuilder.InsertData(
@@ -447,10 +449,10 @@ namespace FinancialTips.Server.Migrations
                 columns: new[] { "Id", "CreatedBy", "DateCreated", "DateUpdated", "Name", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3118), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3123), "Utilities", "System" },
-                    { 2, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3125), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3126), "Bills", "System" },
-                    { 3, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3127), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3127), "Cards", "System" },
-                    { 4, "System", new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3128), new DateTime(2023, 2, 5, 0, 55, 48, 112, DateTimeKind.Local).AddTicks(3129), "Insurance Tips", "System" }
+                    { 1, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8774), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8780), "Utilities", "System" },
+                    { 2, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8783), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8784), "Bills", "System" },
+                    { 3, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8854), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8855), "Cards", "System" },
+                    { 4, "System", new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8856), new DateTime(2023, 2, 5, 6, 18, 13, 785, DateTimeKind.Local).AddTicks(8857), "Insurance Tips", "System" }
                 });
 
             migrationBuilder.InsertData(

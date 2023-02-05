@@ -1,0 +1,24 @@
+﻿@page "/charts/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Chart</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditChart" chart="chart" />
+
+@code {
+        [Parameter] public int id { get; set; }
+        Chart chart = new Chart();
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        chart = await _client.GetFromJsonAsync<Chart>($"{Endpoints.ChartsEndpoint}/{id}");
+    }
+
+    async Task EditChart()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.ChartsEndpoint}/{id}", chart);
+        _navManager.NavigateTo("/charts/");
+    }
+
+}

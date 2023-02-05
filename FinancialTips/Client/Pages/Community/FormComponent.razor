@@ -1,0 +1,25 @@
+﻿<EditForm Model="@community" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@community.Name" class="form-control" />
+            <ValidationMessage For="@(() => community.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+    <FinancialTips.Client.Components.BackToList Target="Communitys" />
+</EditForm>
+
+
+@code {
+    [Parameter] public Community community { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+}
