@@ -1,0 +1,25 @@
+﻿<EditForm Model="@financialplanning" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@financialplanning.Name" class="form-control" />
+            <ValidationMessage For="@(() => financialplanning.Name)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+    <FinancialTips.Client.Components.BackToList Target="FinancialPlannings" />
+</EditForm>
+
+
+@code {
+    [Parameter] public FinancialPlanning financialplanning { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+}

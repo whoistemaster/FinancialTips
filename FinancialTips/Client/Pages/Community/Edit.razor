@@ -3,7 +3,7 @@
 @inject NavigationManager _navManager
 
 <h3>Edit Community</h3>
-<FormComponent ButtonText="Update" OnValidSubmit="EditCommunity" chart="community" />
+<FormComponent ButtonText="Update" OnValidSubmit="EditCommunity" community="community" />
 
 @code {
     [Parameter] public int id { get; set; }

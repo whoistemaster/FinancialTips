@@ -1,0 +1,27 @@
+﻿@page "/blogs/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Blog</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditBlog" blog="blog" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Blog blog = new Blog();
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        blog = await _client.GetFromJsonAsync<Blog>($"{Endpoints.BlogsEndpoint}/{id}");
+    }
+
+    async Task EditBlog()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.BlogsEndpoint}/{id}", blog);
+        _navManager.NavigateTo("/blogs/");
+    }
+
+}
+
+
+

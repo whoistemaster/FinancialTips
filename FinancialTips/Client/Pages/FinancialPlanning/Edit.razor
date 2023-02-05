@@ -1,0 +1,27 @@
+﻿@page "/financialplannings/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit FinancialPlanning</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditFinancialPlanning" financialplanning="financialplanning" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    FinancialPlanning financialplanning = new FinancialPlanning();
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        financialplanning = await _client.GetFromJsonAsync<FinancialPlanning>($"{Endpoints.FinancialPlanningsEndpoint}/{id}");
+    }
+
+    async Task EditFinancialPlanning()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.FinancialPlanningsEndpoint}/{id}", financialplanning);
+        _navManager.NavigateTo("/financialplannings/");
+    }
+
+}
+
+
+

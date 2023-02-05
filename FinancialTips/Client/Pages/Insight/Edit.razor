@@ -1,0 +1,27 @@
+﻿@page "/insights/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Insight</h3>
+<FormComponent ButtonText="Update" OnValidSubmit="EditInsight" insight="insight" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Insight insight = new Insight();
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        insight = await _client.GetFromJsonAsync<Insight>($"{Endpoints.InsightsEndpoint}/{id}");
+    }
+
+    async Task EditInsight()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.InsightsEndpoint}/{id}", insight);
+        _navManager.NavigateTo("/insights/");
+    }
+
+}
+
+
+
