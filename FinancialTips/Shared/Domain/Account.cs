@@ -8,10 +8,16 @@ namespace FinancialTips.Shared.Domain
     public class Account : BaseDomainModel, IValidatableObject
     {
         public DateTime? DateIn { get; set; }
+        [Required]
         public DateTime DateOut { get; set; }
         public string Password { get; set; }
+
+        [Required]
         public int? TipId { get; set; }
         public virtual Tip Tip { get; set; }
+
+        [Required]
+
         public int? CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
