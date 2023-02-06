@@ -3,116 +3,122 @@
 <EditForm Model="@tip" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
+    <fieldset disabled="@Disabled">
 
-    <div class="form-group">
-        <label>Blog: </label>
-        <div>
-            <InputSelect @bind-Value="tip.BlogId" class="form-control">
-                <option value=" ">-- Select Blog -- </option>
-                @if (Blogs != null)
-                {
-                    foreach (var blog in Blogs)
+        <div class="form-group">
+            <label>Blog: </label>
+            <div>
+                <InputSelect @bind-Value="tip.BlogId" class="form-control">
+                    <option value=" ">-- Select Blog -- </option>
+                    @if (Blogs != null)
                     {
-                        <option value="@blog.Id">@blog.Name</option>
+                        foreach (var blog in Blogs)
+                        {
+                            <option value="@blog.Id">@blog.Name</option>
+                        }
                     }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => tip.BlogId)" />
+                </InputSelect>
+                <ValidationMessage For="@(() => tip.BlogId)" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Chart: </label>
-        <div>
-            <InputSelect @bind-Value="tip.ChartId" class="form-control">
-                <option value=" ">-- Select Chart -- </option>
-                @if (Charts != null)
-                {
-                    foreach (var chart in Charts)
+        <div class="form-group">
+            <label>Chart: </label>
+            <div>
+                <InputSelect @bind-Value="tip.ChartId" class="form-control">
+                    <option value=" ">-- Select Chart -- </option>
+                    @if (Charts != null)
                     {
-                        <option value="@chart.Id">@chart.Name</option>
+                        foreach (var chart in Charts)
+                        {
+                            <option value="@chart.Id">@chart.Name</option>
+                        }
                     }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => tip.ChartId)" />
+                </InputSelect>
+                <ValidationMessage For="@(() => tip.ChartId)" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Community: </label>
-        <div>
-            <InputSelect @bind-Value="tip.CommunityId" class="form-control">
-                <option value=" ">-- Select Community -- </option>
-                @if (Communitys != null)
-                {
-                    foreach (var community in Communitys)
+        <div class="form-group">
+            <label>Community: </label>
+            <div>
+                <InputSelect @bind-Value="tip.CommunityId" class="form-control">
+                    <option value=" ">-- Select Community -- </option>
+                    @if (Communitys != null)
                     {
-                        <option value="@community.Id">@community.Name</option>
+                        foreach (var community in Communitys)
+                        {
+                            <option value="@community.Id">@community.Name</option>
+                        }
                     }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => tip.CommunityId)" />
+                </InputSelect>
+                <ValidationMessage For="@(() => tip.CommunityId)" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>FinancialPlanning: </label>
-        <div>
-            <InputSelect @bind-Value="tip.FinancialPlanningId" class="form-control">
-                <option value=" ">-- Select FinancialPlanning -- </option>
-                @if (FinancialPlannings != null)
-                {
-                    foreach (var financialplanning in FinancialPlannings)
+        <div class="form-group">
+            <label>FinancialPlanning: </label>
+            <div>
+                <InputSelect @bind-Value="tip.FinancialPlanningId" class="form-control">
+                    <option value=" ">-- Select FinancialPlanning -- </option>
+                    @if (FinancialPlannings != null)
                     {
-                        <option value="@financialplanning.Id">@financialplanning.Name</option>
+                        foreach (var financialplanning in FinancialPlannings)
+                        {
+                            <option value="@financialplanning.Id">@financialplanning.Name</option>
+                        }
                     }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => tip.FinancialPlanningId)" />
+                </InputSelect>
+                <ValidationMessage For="@(() => tip.FinancialPlanningId)" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Insight: </label>
-        <div>
-            <InputSelect @bind-Value="tip.InsightId" class="form-control">
-                <option value=" ">-- Select Insight -- </option>
-                @if (Insights != null)
-                {
-                    foreach (var insight in Insights)
+        <div class="form-group">
+            <label>Insight: </label>
+            <div>
+                <InputSelect @bind-Value="tip.InsightId" class="form-control">
+                    <option value=" ">-- Select Insight -- </option>
+                    @if (Insights != null)
                     {
-                        <option value="@insight.Id">@insight.Name</option>
+                        foreach (var insight in Insights)
+                        {
+                            <option value="@insight.Id">@insight.Name</option>
+                        }
                     }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => tip.InsightId)" />
+                </InputSelect>
+                <ValidationMessage For="@(() => tip.InsightId)" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Year: </label>
-        <div>
-            <InputNumber @bind-Value="@tip.Year" class="form-control" />
-            <ValidationMessage For="@(() => tip.Year)" />
+        <div class="form-group">
+            <label>Year: </label>
+            <div>
+                <InputNumber @bind-Value="@tip.Year" class="form-control" />
+                <ValidationMessage For="@(() => tip.Year)" />
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label>Daily Rate: </label>
-        <div>
-            <InputNumber @bind-Value="@tip.RentalRate" class="form-control" />
-            <ValidationMessage For="@(() => tip.RentalRate)" />
+        <div class="form-group">
+            <label>Daily Rate: </label>
+            <div>
+                <InputNumber @bind-Value="@tip.RentalRate" class="form-control" />
+                <ValidationMessage For="@(() => tip.RentalRate)" />
+            </div>
         </div>
-    </div>
+    </fieldset>
 
-    <button type="submit" class="btn btn-success btn-block">
-        @ButtonText
-    </button>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
     <FinancialTips.Client.Components.BackToList Target="Tips" />
 
 </EditForm>
 
 @code {
+    [Parameter] public bool Disabled { get; set; } = false;
     [Parameter] public Tip tip { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }

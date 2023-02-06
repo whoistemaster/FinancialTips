@@ -1,0 +1,15 @@
+﻿@page "/financialplannings/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+<h3>View</h3>
+<FormComponent financialplanning="financialplanning" Disabled="true" />
+@code {
+    [Parameter] public int id { get; set; }
+    FinancialPlanning financialplanning = new FinancialPlanning();
+    protected async override Task OnParametersSetAsync()
+    {
+        financialplanning = await
+        _client.GetFromJsonAsync<FinancialPlanning>($"{Endpoints.FinancialPlanningsEndpoint}/{id}");
+    }
+}
+

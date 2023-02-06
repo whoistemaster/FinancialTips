@@ -1,4 +1,6 @@
-﻿<EditForm Model="@blog" OnValidSubmit="@OnValidSubmit">
+﻿@inject HttpClient _client
+
+<EditForm Model="@blog" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <fieldset disabled="@Disabled">
@@ -21,8 +23,8 @@
     }
     <FinancialTips.Client.Components.BackToList Target="Blogs" />
 </EditForm>
-    
-   
+
+
 
 
 @code {

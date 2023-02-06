@@ -1,23 +1,31 @@
-﻿<EditForm Model="@insight" OnValidSubmit="@OnValidSubmit">
+﻿@inject HttpClient _client
+
+<EditForm Model="@insight" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
+    <fieldset disabled="@Disabled">
 
-    <div class="form-group">
-        <label>Name: </label>
-        <div>
-            <InputText @bind-Value="@insight.Name" class="form-control" />
-            <ValidationMessage For="@(() => insight.Name)" />
+        <div class="form-group">
+            <label>Name: </label>
+            <div>
+                <InputText @bind-Value="@insight.Name" class="form-control" />
+                <ValidationMessage For="@(() => insight.Name)" />
+            </div>
         </div>
-    </div>
+    </fieldset>
 
-    <button type="submit" class="btn btn-success btn-block">
-        @ButtonText
-    </button>
+    @if (!Disabled)
+    {
+        <button type="submit" class="btn btn-success btn-block">
+            @ButtonText
+        </button>
+    }
     <FinancialTips.Client.Components.BackToList Target="Insights" />
 </EditForm>
 
 
 @code {
+    [Parameter] public bool Disabled { get; set; } = false;
     [Parameter] public Insight insight { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
     [Parameter] public EventCallback OnValidSubmit { get; set; }
