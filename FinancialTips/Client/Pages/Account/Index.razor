@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@implements IDisposable
 
 
 <h3 class="card-title"> Accounts </h3>
@@ -18,7 +19,7 @@
 }
 else
 {
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="accountsTable">
         <thead>
             <tr>
                 <th>Account Id</th>
@@ -32,24 +33,24 @@ else
         <tbody>
             @foreach (var account in Accounts)
             {
-            <tr>
-                <td>@account.Id</td>
-                <td>@account.Customer.FirstName</td>
-                <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-                <td>@(account.DateIn != null ? (account.DateIn.Value -account.DateOut).TotalDays.ToString() : "To Be Determined")</td>                
-                <td>@account.Tip.Year</td>
-                <td>
-                    <a href="/accounts/view/@account.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/accounts/edit/@account.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(account.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
-            </tr>
+                <tr>
+                    <td>@account.Id</td>
+                    <td>@account.Customer.FirstName</td>
+                    <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
+                    <td>@(account.DateIn != null ? (account.DateIn.Value -account.DateOut).TotalDays.ToString() : "To Be Determined")</td>
+                    <td>@account.Tip.Year</td>
+                    <td>
+                        <a href="/accounts/view/@account.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/accounts/edit/@account.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(account.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -62,6 +63,16 @@ else
     protected async override Task OnInitializedAsync()
     {
         Accounts = await _client.GetFromJsonAsync<List<Account>>($"{Endpoints.AccountsEndpoint}");
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#accountsTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#accountsTable");
     }
 
     async Task Delete(int accountId)

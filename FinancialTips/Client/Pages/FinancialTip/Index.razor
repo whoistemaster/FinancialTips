@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@implements IDisposable
 
 
 <h3 class="card-title"> Tips </h3>
@@ -17,7 +18,7 @@
 }
 else
 {
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="tipsTable">
         <thead>
             <tr>
                 <th>Blog</th>
@@ -32,25 +33,25 @@ else
         <tbody>
             @foreach (var tip in Tips)
             {
-            <tr>
-                <td>@tip.Blog.Name</td>
-                <td>@tip.Chart.Name</td>
-                <td>@tip.Community.Name</td>
-                <td>@tip.FinancialPlanning.Name</td>
-                <td>@tip.Insight.Name</td>
-                <td>@tip.Year</td>
-                <td>
-                <a href="/tips/view/@tip.Id" class="btn btn-primary">
-                    <span class="oi oi-book"></span>
-                </a>
-                <a href="/tips/edit/@tip.Id" class="btn btn-warning">
-                    <span class="oi oi-pencil"></span>
-                </a>
-                <button class="btn btn-danger" @onclick="@(()=>Delete(tip.Year))">
-                    <span class="oi oi-delete"></span>
-                </button>
-                </td>
-            </tr>
+                <tr>
+                    <td>@tip.Blog.Name</td>
+                    <td>@tip.Chart.Name</td>
+                    <td>@tip.Community.Name</td>
+                    <td>@tip.FinancialPlanning.Name</td>
+                    <td>@tip.Insight.Name</td>
+                    <td>@tip.Year</td>
+                    <td>
+                        <a href="/tips/view/@tip.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/tips/edit/@tip.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(tip.Year))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -62,6 +63,16 @@ else
     protected async override Task OnInitializedAsync()
     {
         Tips = await _client.GetFromJsonAsync<List<Tip>>($"{Endpoints.TipsEndpoint}");
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#tipsTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#tipsTable");
     }
 
     async Task Delete(int tipId)

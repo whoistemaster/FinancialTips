@@ -2,11 +2,12 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@implements IDisposable
 
 
 <h3 class="card-title"> Customers </h3>
 <a href="/customers/create" class="btn btn-secondary">
-<span class="oi oi-plus"></span>
+    <span class="oi oi-plus"></span>
     Create New Customer
 </a>
 <br />
@@ -17,7 +18,7 @@
 }
 else
 {
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="customersTable">
         <thead>
             <tr>
                 <th>First Name</th>
@@ -31,26 +32,26 @@ else
         <tbody>
             @foreach (var customer in Customers)
             {
-            <tr>
-                <td>@customer.FirstName</td>
-                <td>@customer.LastName</td>
-                <td>@customer.Gender</td>
-                <td>@customer.Contact</td>
-                <td>@customer.EmailAddress</td>
+                <tr>
+                    <td>@customer.FirstName</td>
+                    <td>@customer.LastName</td>
+                    <td>@customer.Gender</td>
+                    <td>@customer.Contact</td>
+                    <td>@customer.EmailAddress</td>
 
-                <td>
-                    <a href="/customers/view/@customer.Id" class="btn btn-primary">
-                        <span class="oi oi-book"></span>
-                    </a>
-                    <a href="/customers/edit/@customer.Id" class="btn btn-warning">
-                        <span class="oi oi-pencil"></span>
-                    </a>
-                    <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
-                        <span class="oi oi-delete"></span>
-                    </button>
-                </td>
+                    <td>
+                        <a href="/customers/view/@customer.Id" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/customers/edit/@customer.Id" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(customer.Id))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
 
-            </tr>
+                </tr>
             }
         </tbody>
     </table>
@@ -62,6 +63,16 @@ else
     protected async override Task OnInitializedAsync()
     {
         Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#customersTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#customersTable");
     }
 
     async Task Delete(int customerId)

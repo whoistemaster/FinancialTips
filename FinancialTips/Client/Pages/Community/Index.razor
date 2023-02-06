@@ -2,7 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
-
+@implements IDisposable
 
 <h3 class="card-title">Communitys</h3>
 <a href="/communitys/create" class="btn btn-secondary">
@@ -17,7 +17,7 @@
 }
 else
 {
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="communitysTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -52,6 +52,16 @@ else
     protected async override Task OnInitializedAsync()
     {
         Communitys = await _client.GetFromJsonAsync<List<Community>>($"{Endpoints.CommunitysEndpoint}");
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#communitysTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#communitysTable");
     }
 
     async Task Delete(int communityId)

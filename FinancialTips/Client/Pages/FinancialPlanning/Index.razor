@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@implements IDisposable
 
 
 <h3 class="card-title"> FinancialPlannings </h3>
@@ -17,7 +18,7 @@
 }
 else
 {
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="financialplanningsTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -52,6 +53,16 @@ else
     protected async override Task OnInitializedAsync()
     {
         FinancialPlannings = await _client.GetFromJsonAsync<List<FinancialPlanning>>($"{Endpoints.FinancialPlanningsEndpoint}");
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        await js.InvokeVoidAsync("AddDataTable", "#financialplanningsTable");
+    }
+
+    public void Dispose()
+    {
+        js.InvokeVoidAsync("DataTablesDispose", "#financialplanningsTable");
     }
 
     async Task Delete(int financialplanningId)
