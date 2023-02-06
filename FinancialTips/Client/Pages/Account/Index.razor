@@ -36,13 +36,13 @@ else
                 <td>@account.Id</td>
                 <td>@account.Customer.FirstName</td>
                 <td>@account.DateCreated.Date.ToString("dd MMMM yyyy")</td>
-                <td>@(account.DateIn != nullDT ? (account.DateIn -account.DateOut).TotalDays.ToString() : "To Be Determined")</td>
+                <td>@(account.DateIn != null ? (account.DateIn.Value -account.DateOut).TotalDays.ToString() : "To Be Determined")</td>                
                 <td>@account.Tip.Year</td>
                 <td>
-                    <a href="/blogs/view/@account.Id" class="btn btn-primary">
+                    <a href="/accounts/view/@account.Id" class="btn btn-primary">
                         <span class="oi oi-book"></span>
                     </a>
-                    <a href="/blogs/edit/@account.Id" class="btn btn-warning">
+                    <a href="/accounts/edit/@account.Id" class="btn btn-warning">
                         <span class="oi oi-pencil"></span>
                     </a>
                     <button class="btn btn-danger" @onclick="@(()=>Delete(account.Id))">

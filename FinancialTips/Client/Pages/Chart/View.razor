@@ -1,0 +1,17 @@
+﻿@page "/charts/view/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>View</h3>
+<FormComponent chart="chart" Disabled="true" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Chart chart = new Chart();
+    protected async override Task OnParametersSetAsync()
+    {
+        chart = await
+        _client.GetFromJsonAsync<Chart>($"{Endpoints.ChartsEndpoint}/{id}");
+    }
+
+}

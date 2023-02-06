@@ -1,0 +1,23 @@
+﻿@page "/tips/edit/{id:int}"
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<h3>Edit Tip</h3>   
+<FormComponent ButtonText="Update" OnValidSubmit="EditTip" tip="tip" />
+@code {
+    [Parameter] public int id { get; set; }
+    Tip tip = new Tip();
+
+
+    protected async override Task OnParametersSetAsync()
+    {
+        tip = await _client.GetFromJsonAsync<Tip>($"{Endpoints.TipsEndpoint}/{id}");
+    }
+
+    async Task EditTip()
+    {
+        await _client.PutAsJsonAsync($"{Endpoints.TipsEndpoint}/{id}", tip);
+        _navManager.NavigateTo("/tips/");
+    }
+
+}
