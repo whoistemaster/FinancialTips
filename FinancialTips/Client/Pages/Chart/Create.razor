@@ -5,23 +5,7 @@
 <h3>Create New Charts</h3>
 <hr />
 <br />
-<EditForm Model="@chart" OnValidSubmit="CreateChart">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Name: </label>
-        <div>
-            <InputText @bind-Value="@chart.Name" class="form-control" />
-            <ValidationMessage For="@(() => chart.Name)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create Charts
-    </button>
-</EditForm>
-
+<FormComponent ButtonText="Create Chart" chart="chart" OnValidSubmit="@CreateChart" />
 
 @code {
     Chart chart = new Chart();

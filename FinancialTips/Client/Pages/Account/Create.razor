@@ -5,69 +5,7 @@
 <h3>Create New Accounts</h3>
 <hr />
 <br />
-<EditForm Model="@account" OnValidSubmit="CreateAccount">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Financial Tips: </label>
-        <div>
-            <InputSelect @bind-Value="account.TipId" class="form-control">
-                <option value=" ">-- Select Financial Tips -- </option>
-                @if (Tips != null)
-                {
-                    foreach (var tip in Tips)
-                    {
-            <option value="@tip.Id">Blog: @tip.Blog.Name - Chart: @tip.Chart.Name - Community:@tip.Community.Name - Financial Planning: @tip.FinancialPlanning.Name - Insight: @tip.Insight.Name</option>
-                    }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => account.TipId)" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Customer: </label>
-        <div>
-            <InputSelect @bind-Value="account.CustomerId" class="form-control">
-                <option value=" ">-- Select Customers -- </option>
-                @if (Customers != null)
-                {
-                    foreach (var customer in Customers)
-                    {
-                        <option value="@customer.Id">@customer.FirstName</option>
-                    }
-                }
-            </InputSelect>
-            <ValidationMessage For="@(() => account.CustomerId)" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>Date Out: </label>
-        <div>
-            <InputDate @bind-Value="@account.DateOut" class="form-control" />
-            <ValidationMessage For="@(() => account.DateOut)" />
-
-            @if (account.Id > 0)
-            {
-                <div class="form-group">
-                    <label>Date In: </label>
-                    <div>
-                        <InputDate @bind-Value="@account.DateIn" class="form-control" />
-                        <ValidationMessage For="@(() => account.DateIn)" />
-                    </div>
-                </div>
-            }
-
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create Accounts
-    </button>
-</EditForm>
-
+<FormComponent ButtonText="Create Account" account="account" OnValidSubmit="@CreateAccount" />
 
 @code {
     Account account = new Account();

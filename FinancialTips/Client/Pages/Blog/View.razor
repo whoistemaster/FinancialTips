@@ -8,6 +8,7 @@
 @code {
     [Parameter] public int id { get; set; }
     Blog blog = new Blog();
+
     protected async override Task OnParametersSetAsync()
     {
         blog = await

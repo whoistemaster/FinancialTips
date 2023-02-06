@@ -5,23 +5,7 @@
 <h3>Create New Blogs</h3>
 <hr />
 <br />
-<EditForm Model="@blog" OnValidSubmit="CreateBlog">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <label>Name: </label>
-        <div>
-            <InputText @bind-Value="@blog.Name" class="form-control" />
-            <ValidationMessage For="@(() => blog.Name)" />
-        </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-block">
-        Create Blogs
-    </button>
-</EditForm>
-
+<FormComponent ButtonText="Create Blog" blog="blog" OnValidSubmit="@CreateBlog" />
 
 @code {
     Blog blog = new Blog();

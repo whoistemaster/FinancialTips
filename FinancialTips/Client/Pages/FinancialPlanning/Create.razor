@@ -5,31 +5,15 @@
 <h3>Create New Financial Plannings</h3>
 <hr />
 <br />
-<EditForm Model="@financialplanning" OnValidSubmit="CreateFinancialPlanning">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+<FormComponent ButtonText="Create Financial Planning" financialplanning="financialplanning" OnValidSubmit="CreateFinancialPlanning" />
+    
+    @code {
+        FinancialPlanning financialplanning = new FinancialPlanning();
 
-    <div class="form-group">
-        <label>Name: </label>
-        <div>
-            <InputText @bind-Value="@financialplanning.Name" class="form-control" />
-            <ValidationMessage For="@(() => financialplanning.Name)" />
-        </div>
-    </div>
+        private async Task CreateFinancialPlanning()
+        {
+            await _client.PostAsJsonAsync(Endpoints.FinancialPlanningsEndpoint, financialplanning);
+            _navManager.NavigateTo("/financialplannings/");
+        }
 
-    <button type="submit" class="btn btn-success btn-block">
-        Create Financial Plannings
-    </button>
-</EditForm>
-
-
-@code {
-    FinancialPlanning financialplanning = new FinancialPlanning();
-
-    private async Task CreateFinancialPlanning()
-    {
-        await _client.PostAsJsonAsync(Endpoints.FinancialPlanningsEndpoint, financialplanning);
-        _navManager.NavigateTo("/financialplannings/");
     }
-
-}
