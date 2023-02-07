@@ -10,7 +10,6 @@ namespace FinancialTips.Shared.Domain
         public DateTime? DateIn { get; set; }
         [Required]
         public DateTime DateOut { get; set; }
-        public string Password { get; set; }
 
         [Required]
         public int? TipId { get; set; }
