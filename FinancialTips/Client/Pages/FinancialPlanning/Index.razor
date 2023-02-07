@@ -2,10 +2,11 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
 @implements IDisposable
 
 
-<h3 class="card-title"> FinancialPlannings </h3>
+<h3 class="card-title"> Financial Plannings </h3>
 <a href="/financialplannings/create" class="btn btn-secondary">
     <span class="oi oi-plus"></span>
     Create New Financial PLannings
@@ -52,6 +53,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
+        _interceptor.MonitorEvent();
         FinancialPlannings = await _client.GetFromJsonAsync<List<FinancialPlanning>>($"{Endpoints.FinancialPlanningsEndpoint}");
     }
 
@@ -62,6 +64,7 @@ else
 
     public void Dispose()
     {
+        _interceptor.DisposeEvent();
         js.InvokeVoidAsync("DataTablesDispose", "#financialplanningsTable");
     }
 

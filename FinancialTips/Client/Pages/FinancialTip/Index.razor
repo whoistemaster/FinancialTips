@@ -2,6 +2,7 @@
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
+@inject HttpInterceptorService _interceptor
 @implements IDisposable
 
 
@@ -49,7 +50,7 @@ else
                         <a href="/tips/edit/@tip.Id" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(tip.Year))">
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(tip.Id))">
                             <span class="oi oi-delete"></span>
                         </button>
                     </td>
@@ -64,6 +65,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
+        _interceptor.MonitorEvent();
         Tips = await _client.GetFromJsonAsync<List<Tip>>($"{Endpoints.TipsEndpoint}");
     }
 
@@ -74,13 +76,14 @@ else
 
     public void Dispose()
     {
+        _interceptor.DisposeEvent();
         js.InvokeVoidAsync("DataTablesDispose", "#tipsTable");
     }
 
     async Task Delete(int tipId)
     {
         var tip = Tips.First(q => q.Id == tipId);
-        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {tip.Year}?");
+        var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {tip.Id}?");
         if (confirm)
         {
             await _client.DeleteAsync($"{Endpoints.TipsEndpoint}/{tipId}");
